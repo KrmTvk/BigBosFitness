@@ -195,7 +195,7 @@ return `<svg viewBox="0 0 64 40">${m[t]}</svg>`}
 const $=s=>document.querySelector(s),td=()=>new Date().toLocaleDateString('en-CA');
 let S={h:[],m:[],day:Math.min(Math.max(new Date().getDay()-1,0),4),tab:'a',rest:90,gx:'0-0',img:{},xs:{},notes:{},dur:{},ws:null,wsd:null,done:null,gm:'w',wr:[],wu:{},goals:{},hd:null,cr:[],cg:90,cc:{warm:5,work:30,rest:60,rounds:8,cool:5},kt:'Düz Yürüyüş',gen:{g:'ikisi',d:5,l:'o'},auto:false,pmonth:null,gs:0,parch:[],wd:{},bk2:0,bk3:0,bk4:0,bk5:0,bk6:0,bk7:0,bk8:0,bk9:0,bk10:0,bk11:0,bk12:0,bk13:0,bk14:0,tr:0,wt:{},dm:0,prog:null,pname:'Kasım programı',pd:0,ow:{},set:{coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1}};
 try{const r=JSON.parse(localStorage.getItem('kf2')||'null');if(r)S=Object.assign(S,r)}catch(e){}
-S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v84 · 24 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
+S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v85 · 24 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
 const save=()=>{if(window.BKX)return;try{localStorage.setItem('kf2',JSON.stringify({obv:S.obv,nu:S.nu,fl:S.fl,bg:S.bg,rmd:S.rmd,ob:S.ob,bo:S.bo,h:S.h,m:S.m,day:S.day,rest:S.rest,gx:S.gx,img:S.img,xs:S.xs,notes:S.notes,dur:S.dur,ws:S.ws,wsd:S.wsd,done:S.done,gm:S.gm,wr:S.wr,wu:S.wu,goals:S.goals,prog:S.prog,pname:S.pname,cr:S.cr,cg:S.cg,cc:S.cc,gen:S.gen,auto:S.auto,pmonth:S.pmonth,gs:S.gs,parch:S.parch,wd:S.wd,bk2:S.bk2,bk3:S.bk3,bk4:S.bk4,bk5:S.bk5,bk6:S.bk6,bk7:S.bk7,bk8:S.bk8,bk9:S.bk9,bk10:S.bk10,bk11:S.bk11,bk12:S.bk12,bk13:S.bk13,bk14:S.bk14,bk15:S.bk15,bk16:S.bk16,tr:S.tr,wt:S.wt,dm:S.dm,cdy:S.cdy,set:S.set,ow:S.ow}))}catch(e){}};
 const exName=id=>{const[a,b]=id.split('-');return P[a]&&P[a].ex[b]?P[a].ex[b][0]:'?'};
 if(!S.tr){S.tr=1;['h','prog','parch','notes','img','wr'].forEach(k=>{if(S[k])try{S[k]=JSON.parse(JSON.stringify(S[k]).replace(/Biceps/g,'Pazı').replace(/Triceps/g,'Arka Kol').replace(/Overhead Arka Kol/g,'Başüstü Arka Kol').replace(/Lying Arka Kol/g,'Yatarak Arka Kol'))}catch(e){}})}
@@ -427,7 +427,7 @@ function stOpen(){stDraw();document.getElementById('st').classList.add('on')}
 function stClose(){document.getElementById('st').classList.remove('on');rstT=0}
 function stSet(k,v){S.set[k]=v;save();if(k=='coach')cdApply();if(k=='awake'){if(!v){try{WL&&WL.release()}catch(e){}WL=null}else wlk()}stDraw()}
 function cdApply(){const e=document.getElementById('cd');if(e)e.style.display=S.set.coach?'':'none';if(!S.set.coach){drawerHide();chatClose()}}
-function stReset(){if(!rstT){rstT=1;stDraw();setTimeout(()=>{rstT=0;if(document.getElementById('st').classList.contains('on'))stDraw()},4000);return}try{localStorage.removeItem('kf2')}catch(e){}location.reload()}
+function stReset(){if(!rstT){rstT=1;stDraw();setTimeout(()=>{rstT=0;if(document.getElementById('st').classList.contains('on'))stDraw()},4000);return}window.BKX=1;try{localStorage.removeItem('kf2');localStorage.removeItem('kfp')}catch(e){}location.reload()}
 const CHQ=['🏋️ Bugün ne var?','📅 Yarın ne var?','📈 İlerlemem','🍗 Ne yemeliyim?','😴 Yorgunum','🤕 Ağrım var','💪 Motive et','❓ Neler sorabilirim?'];
 function chatAdd(t,c){const m=document.getElementById('chm');if(!m)return;const d=document.createElement('div');d.className=c;d.textContent=c=='k'?NMs(t):t;m.appendChild(d);m.scrollTop=m.scrollHeight}
 /* ===== Koç Aslan v80: akıllı yerel sohbet ===== */
