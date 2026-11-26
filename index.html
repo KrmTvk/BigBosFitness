@@ -195,7 +195,7 @@ return `<svg viewBox="0 0 64 40">${m[t]}</svg>`}
 const $=s=>document.querySelector(s),td=()=>new Date().toLocaleDateString('en-CA');
 let S={h:[],m:[],day:Math.min(Math.max(new Date().getDay()-1,0),4),tab:'a',rest:90,gx:'0-0',img:{},xs:{},notes:{},dur:{},ws:null,wsd:null,done:null,gm:'w',wr:[],wu:{},goals:{},hd:null,cr:[],cg:90,cc:{warm:5,work:30,rest:60,rounds:8,cool:5},kt:'Düz Yürüyüş',gen:{g:'ikisi',d:5,l:'o'},auto:false,pmonth:null,gs:0,parch:[],wd:{},bk2:0,bk3:0,bk4:0,bk5:0,bk6:0,bk7:0,bk8:0,bk9:0,bk10:0,bk11:0,bk12:0,bk13:0,bk14:0,tr:0,wt:{},dm:0,prog:null,pname:'Kasım programı',pd:0,ow:{},set:{coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1}};
 try{const r=JSON.parse(localStorage.getItem('kf2')||'null');if(r)S=Object.assign(S,r)}catch(e){}
-S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v77 · 24 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
+S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v78 · 24 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
 const save=()=>{if(window.BKX)return;try{localStorage.setItem('kf2',JSON.stringify({nu:S.nu,fl:S.fl,bg:S.bg,rmd:S.rmd,ob:S.ob,bo:S.bo,h:S.h,m:S.m,day:S.day,rest:S.rest,gx:S.gx,img:S.img,xs:S.xs,notes:S.notes,dur:S.dur,ws:S.ws,wsd:S.wsd,done:S.done,gm:S.gm,wr:S.wr,wu:S.wu,goals:S.goals,prog:S.prog,pname:S.pname,cr:S.cr,cg:S.cg,cc:S.cc,gen:S.gen,auto:S.auto,pmonth:S.pmonth,gs:S.gs,parch:S.parch,wd:S.wd,bk2:S.bk2,bk3:S.bk3,bk4:S.bk4,bk5:S.bk5,bk6:S.bk6,bk7:S.bk7,bk8:S.bk8,bk9:S.bk9,bk10:S.bk10,bk11:S.bk11,bk12:S.bk12,bk13:S.bk13,bk14:S.bk14,bk15:S.bk15,bk16:S.bk16,tr:S.tr,wt:S.wt,dm:S.dm,cdy:S.cdy,set:S.set,ow:S.ow}))}catch(e){}};
 const exName=id=>{const[a,b]=id.split('-');return P[a]&&P[a].ex[b]?P[a].ex[b][0]:'?'};
 if(!S.tr){S.tr=1;['h','prog','parch','notes','img','wr'].forEach(k=>{if(S[k])try{S[k]=JSON.parse(JSON.stringify(S[k]).replace(/Biceps/g,'Pazı').replace(/Triceps/g,'Arka Kol').replace(/Overhead Arka Kol/g,'Başüstü Arka Kol').replace(/Lying Arka Kol/g,'Yatarak Arka Kol'))}catch(e){}})}
@@ -671,7 +671,7 @@ function show(d,j){const n=P[d].ex[j][0],u=S.img[n]||IMG[n];if(!u){pick(d,j);ret
 function pick(d,j){const n=P[d].ex[j][0],f=document.createElement('input');f.type='file';f.accept='image/*';f.onchange=()=>{if(!f.files[0])return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,240/im.width),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.img[n]=c.toDataURL('image/jpeg',.7);save();render()};im.src=r.result};r.readAsDataURL(f.files[0])};f.click()}
 document.querySelectorAll('nav button[data-t]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;render();scrollTo(0,0)});
 (function(){const b=document.getElementById('bbn'),m=document.getElementById('bbm');let t=null,lp=0;
-const items=[['a','🧍','Anatomi'],['k','🏃','Kardio'],['g','📈','Gelişim'],['w','🏋️','Antrenman'],['m','📏','Ölçüler'],['p','📋','Program'],['s','⚙️','Ayarlar']];
+const items=[['g','📈','Gelişim'],['k','🏃','Kardio'],['a','🧍','Anatomi'],['w','🏋️','Antrenman'],['m','📏','Ölçüler'],['p','📋','Program'],['s','⚙️','Ayarlar']];
 const hide=()=>{m.className='';try{place(0)}catch(e){}};
 const go=k=>{hide();if(k=='s'){stOpen();return}S.tab=k;render();scrollTo(0,0)};
 m.innerHTML=items.map(x=>`<div data-k="${x[0]}"><i>${x[1]}</i>${x[2]}</div>`).join('');
