@@ -195,8 +195,8 @@ return `<svg viewBox="0 0 64 40">${m[t]}</svg>`}
 const $=s=>document.querySelector(s),td=()=>new Date().toLocaleDateString('en-CA');
 let S={h:[],m:[],day:Math.min(Math.max(new Date().getDay()-1,0),4),tab:'a',rest:90,gx:'0-0',img:{},xs:{},notes:{},dur:{},ws:null,wsd:null,done:null,gm:'w',wr:[],wu:{},goals:{},hd:null,cr:[],cg:90,cc:{warm:5,work:30,rest:60,rounds:8,cool:5},kt:'Düz Yürüyüş',gen:{g:'ikisi',d:5,l:'o'},auto:false,pmonth:null,gs:0,parch:[],wd:{},bk2:0,bk3:0,bk4:0,bk5:0,bk6:0,bk7:0,bk8:0,bk9:0,bk10:0,bk11:0,bk12:0,bk13:0,bk14:0,tr:0,wt:{},dm:0,prog:null,pname:'Kasım programı',pd:0,ow:{},set:{coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1}};
 try{const r=JSON.parse(localStorage.getItem('kf2')||'null');if(r)S=Object.assign(S,r)}catch(e){}
-S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v78 · 24 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
-const save=()=>{if(window.BKX)return;try{localStorage.setItem('kf2',JSON.stringify({nu:S.nu,fl:S.fl,bg:S.bg,rmd:S.rmd,ob:S.ob,bo:S.bo,h:S.h,m:S.m,day:S.day,rest:S.rest,gx:S.gx,img:S.img,xs:S.xs,notes:S.notes,dur:S.dur,ws:S.ws,wsd:S.wsd,done:S.done,gm:S.gm,wr:S.wr,wu:S.wu,goals:S.goals,prog:S.prog,pname:S.pname,cr:S.cr,cg:S.cg,cc:S.cc,gen:S.gen,auto:S.auto,pmonth:S.pmonth,gs:S.gs,parch:S.parch,wd:S.wd,bk2:S.bk2,bk3:S.bk3,bk4:S.bk4,bk5:S.bk5,bk6:S.bk6,bk7:S.bk7,bk8:S.bk8,bk9:S.bk9,bk10:S.bk10,bk11:S.bk11,bk12:S.bk12,bk13:S.bk13,bk14:S.bk14,bk15:S.bk15,bk16:S.bk16,tr:S.tr,wt:S.wt,dm:S.dm,cdy:S.cdy,set:S.set,ow:S.ow}))}catch(e){}};
+S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v79 · 24 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
+const save=()=>{if(window.BKX)return;try{localStorage.setItem('kf2',JSON.stringify({obv:S.obv,nu:S.nu,fl:S.fl,bg:S.bg,rmd:S.rmd,ob:S.ob,bo:S.bo,h:S.h,m:S.m,day:S.day,rest:S.rest,gx:S.gx,img:S.img,xs:S.xs,notes:S.notes,dur:S.dur,ws:S.ws,wsd:S.wsd,done:S.done,gm:S.gm,wr:S.wr,wu:S.wu,goals:S.goals,prog:S.prog,pname:S.pname,cr:S.cr,cg:S.cg,cc:S.cc,gen:S.gen,auto:S.auto,pmonth:S.pmonth,gs:S.gs,parch:S.parch,wd:S.wd,bk2:S.bk2,bk3:S.bk3,bk4:S.bk4,bk5:S.bk5,bk6:S.bk6,bk7:S.bk7,bk8:S.bk8,bk9:S.bk9,bk10:S.bk10,bk11:S.bk11,bk12:S.bk12,bk13:S.bk13,bk14:S.bk14,bk15:S.bk15,bk16:S.bk16,tr:S.tr,wt:S.wt,dm:S.dm,cdy:S.cdy,set:S.set,ow:S.ow}))}catch(e){}};
 const exName=id=>{const[a,b]=id.split('-');return P[a]&&P[a].ex[b]?P[a].ex[b][0]:'?'};
 if(!S.tr){S.tr=1;['h','prog','parch','notes','img','wr'].forEach(k=>{if(S[k])try{S[k]=JSON.parse(JSON.stringify(S[k]).replace(/Biceps/g,'Pazı').replace(/Triceps/g,'Arka Kol').replace(/Overhead Arka Kol/g,'Başüstü Arka Kol').replace(/Lying Arka Kol/g,'Yatarak Arka Kol'))}catch(e){}})}
 if(!S.dm){S.dm=1;['h','prog','parch','notes','img','wr'].forEach(k=>{if(S[k])try{S[k]=JSON.parse(JSON.stringify(S[k]).replace(/Dambıl/g,'Dumbbell').replace(/dambıl/g,'dumbbell'))}catch(e){}})}
@@ -219,14 +219,17 @@ const CLO={};
 function colp(){document.querySelectorAll('#app .card').forEach(c=>{const h=c.firstElementChild;if(!h||h.tagName!='H2'||c.classList.contains('tc')||c.children.length<2)return;const k=S.tab+'|'+h.textContent.split(' · ')[0].trim();c.dataset.k=k;const b=document.createElement('div');b.className='cb';while(h.nextSibling)b.appendChild(h.nextSibling);c.appendChild(b);h.classList.add('ch');h.insertAdjacentHTML('beforeend','<span class="chv">⌄</span>');{const v=CLO[k];if(v===undefined?!c.dataset.open:v===0)c.classList.add('cc')}})}
 document.addEventListener('click',e=>{const h=e.target.closest&&e.target.closest('h2.ch');if(!h)return;const c=h.parentNode;c.classList.toggle('cc');CLO[c.dataset.k]=c.classList.contains('cc')?0:1});
 
-const OB=[['👋','BigBos Fitness\'e hoş geldin','Evde dambıl ile antrenman programı, kardio takibi, vücut ölçüleri ve gelişim takibi tek yerde. Kısa bir tur atalım.'],
-['🧍','Anatomi','Uygulama burada açılır. O gün hangi kasların çalışacağını, her kasın ne işe yaradığını ve zorlanırsa neler olabileceğini gösterir.'],
-['🏋️','Antrenman','Isınma, hareketler ve soğumayı buradan yaparsın. Her seti işaretle, ağırlığı + ve − ile ayarla, hareketler kayarak gelsin.'],
-['🏃','Kardio','Yürüyüş ya da koşu gibi süreli kardio, futbol ve voleybol gibi serbest aktiviteler burada. Haftalık hedefini ve geçmişini de buradan izlersin.'],
-['📈','Gelişim','Takvim, haftalık toplam ağırlık, rekorların ve son antrenmanların burada. Ne kadar ilerlediğini görürsün.'],
-['📏','Ölçüler','Kilonu ve vücut ölçülerini kaydet, hedef belirle. Hedefe ne kadar kaldığını uygulama hesaplar.'],
-['📋','Program','Hedefini, haftada kaç gün çalışacağını ve seviyeni seç. Program kendiliğinden hazırlanır. Her gün için üst, alt, karışık vücut ya da dinlenme seçebilirsin.'],
-['💬','Koç Aslan','Sağ kenardaki koça dokununca motive edici bir söz söyler. Basılı tutarsan sohbet açılır. Yukarı aşağı sürükleyebilirsin.']];
+const OB=[['👋','BigBos Fitness\'e hoş geldin','Evde dambıl ile antrenman, kardio, vücut ölçüleri, gelişim takibi ve koç tek yerde. Hızlı bir tur atalım.'],
+['🔴','BBF düğmesi','Altta ortadaki kırmızı BBF düğmesi uygulamanın menüsü. Dokununca ya da basılı tutunca yarım daire açılır. Sekmeleri buradan seçersin. Tekrar basınca kapanır.'],
+['🏋️','Antrenman','Günün antrenmanı burada. Isınma, hareketler ve soğuma var. Setleri işaretle, ağırlığı + ve − ile ayarla. Geçen sefer hepsini tamamladıysan ağırlık kendiliğinden bir kademe artar.'],
+['🤕','Bugün nasıl hissediyorsun?','Antrenman sekmesinin üstünde Zinde, Normal ya da Ağrılı seç. Ağrılıysan ağırlıklar bir kademe düşer ve koç dinlenmeni önerir.'],
+['🧍','Anatomi','O gün hangi kasların çalışacağını, her kasın ne işe yaradığını ve zorlanırsan neler olabileceğini gösterir. Uygulama açılırken seni burada karşılar.'],
+['🏃','Kardio','Yürüyüş ya da koşu gibi süreli kardio ve futbol, voleybol gibi serbest aktiviteler. Haftalık hedefini ve geçmişini buradan izlersin.'],
+['📈','Gelişim','Seri ve rozetlerin, takvim, haftalık toplam ağırlık, rekorların ve son antrenmanların. Programdaki günleri aksatmadan yaparsan seri artar, rozet kazanırsın.'],
+['📏','Ölçüler','Kilonu ve vücut ölçülerini kaydet, hedef belirle. Hedefe ne kadar kaldığını uygulama hesaplar. En altta ilerleme fotoğraflarını ekleyip ilk ve son halini karşılaştırabilirsin.'],
+['📋','Program','Hedefini, haftada kaç gün çalışacağını ve seviyeni seç. Aylık program kendiliğinden hazırlanır. Her gün için üst, alt, karışık vücut ya da dinlenme seçebilirsin.'],
+['💬','Koç Aslan','Sağ kenardaki koça dokununca motive edici bir söz söyler. Basılı tutarsan sohbet açılır. Yukarı aşağı sürükleyebilirsin.'],
+['⚙️','Ayarlar','Antrenman hatırlatıcı saati, koç ve ses ayarları burada. Yedeği dışa aktarırsan telefon değiştirsen bile verilerin kaybolmaz. Bu turu da buradan tekrar açabilirsin.']];
 let OBi=0;
 function obOpen(){OBi=0;let e=document.getElementById('ob');if(!e){e=document.createElement('div');e.id='ob';document.body.appendChild(e)}e.className='on';obDraw()}
 function obDraw(){const e=document.getElementById('ob');if(!e)return;const x=OB[OBi],last=OBi==OB.length-1;e.innerHTML='<div class="obc"><div class="obi">'+x[0]+'</div><h3>'+x[1]+'</h3><p>'+x[2]+'</p><div class="obd">'+OB.map((_,i)=>'<i class="'+(i==OBi?'c':'')+'"></i>').join('')+'</div><button class="btn" onclick="obNext()">'+(last?'Başla':'İleri')+'</button>'+(last?'':'<div class="obs" onclick="obEnd()">Geç</div>')+'</div>'}
@@ -704,6 +707,7 @@ document.addEventListener('click',e=>{if(!m.className)return;if(e.target===m||(!
 (function(){if(S.bk15)return;S.bk15=1;if(P.length>5)P.length=5;S.prog=P;if(S.day>4)S.day=4;if(S.pd>4)S.pd=4;save()})();
 (function(){if(S.bk16)return;S.bk16=1;while(P.length>5)P.pop();P.push({n:'Cmt - Paz',t:'Dinlenme',ex:[]});S.prog=P;save()})();
 if(S.set.nm==='Kerem'){S.set.nm='BigBos';save()}
+if((S.obv||0)<2){S.ob=0;S.obv=2;save()}
 if(!S.ob)setTimeout(obOpen,900);
 bgCheck(true);setTimeout(rmChk,3500);setInterval(rmChk,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)rmChk()});
 autoMonth();render();
