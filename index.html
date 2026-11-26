@@ -162,7 +162,8 @@ nav button.on{color:var(--tx)}nav button.on i{filter:none;opacity:1}
 nav button{font-size:8.5px!important;letter-spacing:0!important;padding:4px 0!important;min-width:0}nav button i{font-size:18px!important}
 @media (prefers-reduced-motion:reduce){.bbf,.bbf span,.slh{animation:none}}
 nav{align-items:center;justify-content:center}nav button.bbn{flex:none;width:64px;height:64px;margin-top:-26px;border-radius:50%;background:linear-gradient(180deg,#eb4646,#c42a2a);border:3px solid #0a0a0b;box-shadow:0 6px 18px rgba(229,57,58,.45);color:#fff;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;touch-action:manipulation;padding:0!important}nav button.bbn b{font-size:15px;font-weight:900;letter-spacing:-.5px}nav button.bbn.on{box-shadow:0 6px 22px rgba(229,57,58,.8)}
-#bbm{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) scale(.85);opacity:0;pointer-events:none;z-index:10050;background:#1c1c1f;border:1px solid #333;border-radius:20px;padding:6px;min-width:190px;box-shadow:0 12px 40px rgba(0,0,0,.6);transition:.15s}#bbm.on{opacity:1;transform:translateX(-50%) scale(1);pointer-events:auto}#bbm div{display:flex;align-items:center;gap:12px;padding:13px 16px;font-size:16px;font-weight:600;border-radius:14px;color:#fff}#bbm div:active{background:#2c2c30}#bbm i{font-style:normal;font-size:20px}
+#bbm{position:fixed;width:0;height:0;z-index:10050;pointer-events:none}#bbm.on{pointer-events:auto}#bbm::before{content:'';position:fixed;inset:0;background:rgba(0,0,0,0);transition:.2s;z-index:-1;pointer-events:none}#bbm.on::before{background:rgba(0,0,0,.55);pointer-events:auto}
+#bbm div{position:absolute;left:0;top:0;width:60px;height:60px;border-radius:50%;background:#1c1c1f;border:1px solid #3a3a3e;box-shadow:0 6px 18px rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff;opacity:0;transition:transform .22s cubic-bezier(.2,1.3,.4,1),opacity .15s}#bbm.on div{opacity:1}#bbm div:active{background:#2c2c30}#bbm div[data-k=w]{background:linear-gradient(180deg,#eb4646,#c42a2a);border-color:#eb4646}#bbm i{font-style:normal;font-size:21px;line-height:1.1}
 </style></head><body>
 <header><div style="display:flex;align-items:center;gap:11px"><div class="bbf"><span class="l1">BBF</span><span class="l2">💪</span></div><div style="overflow:hidden"><h1 class="slh">BigBos <b>Fitness</b></h1><div class="sub" id="date"></div></div></div><div style="display:flex;align-items:center;gap:10px"><div class="sub" id="prog"></div></div></header>
 <div id="app"></div>
@@ -194,7 +195,7 @@ return `<svg viewBox="0 0 64 40">${m[t]}</svg>`}
 const $=s=>document.querySelector(s),td=()=>new Date().toLocaleDateString('en-CA');
 let S={h:[],m:[],day:Math.min(Math.max(new Date().getDay()-1,0),4),tab:'a',rest:90,gx:'0-0',img:{},xs:{},notes:{},dur:{},ws:null,wsd:null,done:null,gm:'w',wr:[],wu:{},goals:{},hd:null,cr:[],cg:90,cc:{warm:5,work:30,rest:60,rounds:8,cool:5},kt:'Düz Yürüyüş',gen:{g:'ikisi',d:5,l:'o'},auto:false,pmonth:null,gs:0,parch:[],wd:{},bk2:0,bk3:0,bk4:0,bk5:0,bk6:0,bk7:0,bk8:0,bk9:0,bk10:0,bk11:0,bk12:0,bk13:0,bk14:0,tr:0,wt:{},dm:0,prog:null,pname:'Kasım programı',pd:0,ow:{},set:{coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1}};
 try{const r=JSON.parse(localStorage.getItem('kf2')||'null');if(r)S=Object.assign(S,r)}catch(e){}
-S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v72 · 24 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
+S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v73 · 24 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
 const save=()=>{if(window.BKX)return;try{localStorage.setItem('kf2',JSON.stringify({nu:S.nu,fl:S.fl,bg:S.bg,rmd:S.rmd,ob:S.ob,bo:S.bo,h:S.h,m:S.m,day:S.day,rest:S.rest,gx:S.gx,img:S.img,xs:S.xs,notes:S.notes,dur:S.dur,ws:S.ws,wsd:S.wsd,done:S.done,gm:S.gm,wr:S.wr,wu:S.wu,goals:S.goals,prog:S.prog,pname:S.pname,cr:S.cr,cg:S.cg,cc:S.cc,gen:S.gen,auto:S.auto,pmonth:S.pmonth,gs:S.gs,parch:S.parch,wd:S.wd,bk2:S.bk2,bk3:S.bk3,bk4:S.bk4,bk5:S.bk5,bk6:S.bk6,bk7:S.bk7,bk8:S.bk8,bk9:S.bk9,bk10:S.bk10,bk11:S.bk11,bk12:S.bk12,bk13:S.bk13,bk14:S.bk14,bk15:S.bk15,bk16:S.bk16,tr:S.tr,wt:S.wt,dm:S.dm,cdy:S.cdy,set:S.set,ow:S.ow}))}catch(e){}};
 const exName=id=>{const[a,b]=id.split('-');return P[a]&&P[a].ex[b]?P[a].ex[b][0]:'?'};
 if(!S.tr){S.tr=1;['h','prog','parch','notes','img','wr'].forEach(k=>{if(S[k])try{S[k]=JSON.parse(JSON.stringify(S[k]).replace(/Biceps/g,'Pazı').replace(/Triceps/g,'Arka Kol').replace(/Overhead Arka Kol/g,'Başüstü Arka Kol').replace(/Lying Arka Kol/g,'Yatarak Arka Kol'))}catch(e){}})}
@@ -670,12 +671,14 @@ function show(d,j){const n=P[d].ex[j][0],u=S.img[n]||IMG[n];if(!u){pick(d,j);ret
 function pick(d,j){const n=P[d].ex[j][0],f=document.createElement('input');f.type='file';f.accept='image/*';f.onchange=()=>{if(!f.files[0])return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,240/im.width),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.img[n]=c.toDataURL('image/jpeg',.7);save();render()};im.src=r.result};r.readAsDataURL(f.files[0])};f.click()}
 document.querySelectorAll('nav button[data-t]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;render();scrollTo(0,0)});
 (function(){const b=document.getElementById('bbn'),m=document.getElementById('bbm');let t=null,lp=0;
-const items=[['a','🧍','Anatomi'],['w','🏋️','Antrenman'],['k','🏃','Kardio'],['g','📈','Gelişim'],['m','📏','Ölçüler'],['p','📋','Program'],['s','⚙️','Ayarlar']];
-const hide=()=>{m.className=''};
+const items=[['a','🧍','Anatomi'],['k','🏃','Kardio'],['g','📈','Gelişim'],['w','🏋️','Antrenman'],['m','📏','Ölçüler'],['p','📋','Program'],['s','⚙️','Ayarlar']];
+const hide=()=>{m.className='';try{place(0)}catch(e){}};
 const go=k=>{hide();if(k=='s'){stOpen();return}S.tab=k;render();scrollTo(0,0)};
 m.innerHTML=items.map(x=>`<div data-k="${x[0]}"><i>${x[1]}</i>${x[2]}</div>`).join('');
 m.querySelectorAll('div').forEach(d=>d.onclick=e=>{e.stopPropagation();go(d.dataset.k)});
-const show=()=>{lp=1;m.className='on';if(navigator.vibrate)try{navigator.vibrate(15)}catch(e){}};
+const place=on=>{const r=b.getBoundingClientRect();m.style.left=(r.left+r.width/2)+'px';m.style.top=(r.top+r.height/2)+'px';const R=Math.min(128,innerWidth/2-36);m.querySelectorAll('div').forEach((d,i)=>{const a=Math.PI-i*Math.PI/6;d.style.transform=on?`translate(-50%,-50%) translate(${(R*Math.cos(a)).toFixed(1)}px,${(-R*Math.sin(a)).toFixed(1)}px) scale(1)`:'translate(-50%,-50%) scale(.2)';d.style.transitionDelay=on?(i*18)+'ms':'0ms'})};
+place(0);
+const show=()=>{lp=1;place(1);m.className='on';if(navigator.vibrate)try{navigator.vibrate(15)}catch(e){}};
 b.addEventListener('pointerdown',()=>{lp=0;clearTimeout(t);t=setTimeout(show,420)});
 ['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>clearTimeout(t)));
 b.addEventListener('click',()=>{if(lp){lp=0;return}if(m.className)hide();else show()});
