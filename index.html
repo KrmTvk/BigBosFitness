@@ -196,7 +196,7 @@ return `<svg viewBox="0 0 64 40">${m[t]}</svg>`}
 const $=s=>document.querySelector(s),td=()=>new Date().toLocaleDateString('en-CA');
 let S={h:[],m:[],day:Math.min(Math.max(new Date().getDay()-1,0),4),tab:'a',rest:90,gx:'0-0',img:{},xs:{},notes:{},dur:{},ws:null,wsd:null,done:null,gm:'w',wr:[],wu:{},goals:{},hd:null,cr:[],cg:90,cc:{warm:5,work:30,rest:60,rounds:8,cool:5},kt:'Düz Yürüyüş',gen:{g:'ikisi',d:5,l:'o'},auto:false,pmonth:null,gs:0,parch:[],wd:{},bk2:0,bk3:0,bk4:0,bk5:0,bk6:0,bk7:0,bk8:0,bk9:0,bk10:0,bk11:0,bk12:0,bk13:0,bk14:0,tr:0,wt:{},dm:0,prog:null,pname:'Kasım programı',pd:0,ow:{},set:{coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1}};
 try{const r=JSON.parse(localStorage.getItem('kf2')||'null');if(r)S=Object.assign(S,r)}catch(e){}
-S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v121 · 28 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
+S.set=Object.assign({coach:1,every:45,snd:1,vib:1,awake:1,setsay:1,photo:1,wsec:30,nm:'BigBos',mp:1},S.set||{});const VER='v122 · 28 Kas 2026';const NMs=t=>String(t).replace(/Kerem/g,S.set.nm||'BigBos');
 const save=()=>{if(window.BKX)return;try{localStorage.setItem('kf2',JSON.stringify({hml:S.hml,hm:S.hm,pk2:S.pk2,pok:S.pok,tu:S.tu,mh:S.mh,obv:S.obv,nu:S.nu,fl:S.fl,bg:S.bg,rmd:S.rmd,ob:S.ob,bo:S.bo,h:S.h,m:S.m,day:S.day,rest:S.rest,gx:S.gx,img:S.img,xs:S.xs,notes:S.notes,dur:S.dur,ws:S.ws,wsd:S.wsd,done:S.done,gm:S.gm,wr:S.wr,wu:S.wu,goals:S.goals,prog:S.prog,pname:S.pname,cr:S.cr,cg:S.cg,cc:S.cc,gen:S.gen,auto:S.auto,pmonth:S.pmonth,gs:S.gs,parch:S.parch,wd:S.wd,bk2:S.bk2,bk3:S.bk3,bk4:S.bk4,bk5:S.bk5,bk6:S.bk6,bk7:S.bk7,bk8:S.bk8,bk9:S.bk9,bk10:S.bk10,bk11:S.bk11,bk12:S.bk12,bk13:S.bk13,bk14:S.bk14,bk15:S.bk15,bk16:S.bk16,tr:S.tr,wt:S.wt,dm:S.dm,cdy:S.cdy,set:S.set,ow:S.ow}))}catch(e){}};
 const exName=id=>{const[a,b]=id.split('-');return P[a]&&P[a].ex[b]?P[a].ex[b][0]:'?'};
 if(!S.tr){S.tr=1;['h','prog','parch','notes','img','wr'].forEach(k=>{if(S[k])try{S[k]=JSON.parse(JSON.stringify(S[k]).replace(/Biceps/g,'Pazı').replace(/Triceps/g,'Arka Kol').replace(/Overhead Arka Kol/g,'Başüstü Arka Kol').replace(/Lying Arka Kol/g,'Yatarak Arka Kol'))}catch(e){}})}
@@ -210,7 +210,7 @@ function last(id){const n=nm(id),ds=[...new Set(S.h.filter(x=>rn(x)==n&&x.date<t
 const hm=s=>{s=Math.max(0,Math.floor(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60);return(h?h+':'+String(m).padStart(2,'0'):m)+':'+String(s%60).padStart(2,'0')};
 const esc=t=>String(t||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 function weekCount(){const k=wk(td());return new Set(S.h.filter(x=>wk(x.date)==k).map(x=>x.date)).size}
-function streak(){const ds=new Set(S.h.map(x=>x.date));let n=0,d=new Date();d.setHours(12);for(let g=0;g<400;g++){const k=d.toLocaleDateString('en-CA'),w=d.getDay();if(ds.has(k))n++;else if(w>0&&w<6&&k!=td())break;d.setDate(d.getDate()-1)}return n}
+function streak(){const ds=wdays();let n=0,d=new Date();d.setHours(12);for(let g=0;g<400;g++){const k=d.toLocaleDateString('en-CA'),w=d.getDay();if(ds.has(k))n++;else if(w>0&&w<6&&k!=td())break;d.setDate(d.getDate()-1)}return n}
 let tt=null;function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(tt);tt=setTimeout(()=>e.style.display='none',3500)}
 function keep(){const o={};document.querySelectorAll('#app input[id]').forEach(e=>o[e.id]=e.value);return o}
 function renderKeep(){const o=keep();render();for(const k in o){const e=document.getElementById(k);if(e)e.value=o[k]}}
@@ -244,7 +244,7 @@ function exW(e,id){const b=exW0(e,id);if(b==null)return b;S.ow=S.ow||{};if(S.ow[
 function progHint(e,id){S.ow=S.ow||{};if(S.ow[td()+'|'+id]!=null||exW0(e,id)==null)return '';const p=progLast(e[0],e);let t='';if(p)t=p.ok?'⬆️ Geçen sefer hepsini tamamladın, ağırlık bir kademe arttı':'↔️ Geçen seferki ağırlıkla devam';if((S.fl||{})[td()]=='c')t+=(t?' · ':'')+'🤕 ağrılı gün: bir kademe hafif';return t?`<div class="hint">${t}</div>`:''}
 
 /* streak + badges */
-function wdays(){return new Set(S.h.map(x=>x.date))}
+function wdays(){const a=new Set(S.h.map(x=>x.date));Object.keys(S.hm||{}).forEach(k=>{if(Object.values(S.hm[k]).reduce((t,v)=>t+v.length,0)>=6)a.add(k)});return a}
 function streak(){const ds=wdays();let n=0;const d=new Date(td()+'T12:00');for(let i=0;i<400;i++){const k=d.toLocaleDateString('en-CA'),wd=(d.getDay()+6)%7,tr=P[wd]&&P[wd].ex.length;if(tr){if(ds.has(k))n++;else if(i>0)break}d.setDate(d.getDate()-1)}return n}
 const curKg=()=>{const b=[...S.m].reverse().find(x=>x.kilo);return b?b.kilo:80};
 const protGoal=()=>Math.round(curKg()*1.6/5)*5;
@@ -255,7 +255,7 @@ const BG=[['b1','🥇','İlk antrenman',s=>s.days>=1],['b2','💪','10 antrenman
 ['k1','🏃','İlk kardio',s=>s.kc>=1],['k2','🫀','10 kardio',s=>s.kc>=10],['f1','📸','İlk fotoğraf',s=>s.ph>=1]];
 function bgStats(){const nu=S.nu||{};return{days:wdays().size,st:streak(),pr:S.h.filter(x=>x.pr).length,vol:S.h.reduce((a,x)=>a+x.w*x.r,0),kc:S.cr.length,wd:Object.values(S.wt||{}).filter(x=>x>=12).length,pd:Object.values(nu).filter(x=>x.p>=protGoal()).length,ph:phLoad().length}}
 function bgCheck(quiet){try{S.bg=S.bg||[];const st=bgStats(),nw=BG.filter(b=>!S.bg.includes(b[0])&&b[3](st));if(!nw.length)return;nw.forEach(b=>S.bg.push(b[0]));save();if(!quiet){const b=nw[0];toast('🏅 Yeni rozet: '+b[2]);say('🏅 Yeni rozet kazandın: '+b[2]+'! Böyle devam BigBos.','h')}}catch(e){}}
-function streakCard(){const st=bgStats(),got=S.bg||[];return `<div class="card"><h2>🏅 Seri ve rozetler</h2><div class="stat"><div><b>${st.st}</b><span>Gün serisi</span></div><div><b>${st.days}</b><span>Antrenman günü</span></div><div><b>${got.length}/${BG.length}</b><span>Rozet</span></div></div><div class="mu" style="font-size:12px;margin-top:8px">Seri, programdaki antrenman günlerini aksatmadan yapmanla artar. Hafta sonu seriyi bozmaz.</div><div class="bgs">${BG.map(b=>`<div class="bgx ${got.includes(b[0])?'on':''}"><i>${b[1]}</i><span>${b[2]}</span></div>`).join('')}</div></div>`}
+function streakCard(){const st=bgStats(),got=S.bg||[];return `<div class="card"><h2>🏅 Seri ve rozetler</h2><div class="stat"><div><b>${st.st}</b><span>Gün serisi</span></div><div><b>${st.days}</b><span>Antrenman günü</span></div><div><b>${got.length}/${BG.length}</b><span>Rozet</span></div></div><div class="mu" style="font-size:12px;margin-top:8px">Seri, programdaki antrenman günlerini aksatmadan yapmanla artar. Evde en az 6 set yaparsan o gün de sayılır. Hafta sonu seriyi bozmaz.</div><div class="bgs">${BG.map(b=>`<div class="bgx ${got.includes(b[0])?'on':''}"><i>${b[1]}</i><span>${b[2]}</span></div>`).join('')}</div></div>`}
 
 /* nutrition */
 function nuToday(){S.nu=S.nu||{};return S.nu[td()]||(S.nu[td()]={p:0,w:0})}
@@ -314,7 +314,7 @@ let HMT='h';
 const HML=[['k','Kolay',-1,.7],['o','Orta',0,1],['z','Zor',0,1.3],['d','Daha Zor',1,1.6]];
 function hmSc(e){const l=HML.find(x=>x[0]==(S.hml||'o'))||HML[1],sets=Math.max(2,e[1]+l[2]),f=l[3];const r=e[2].replace(/\d+/g,n=>{let v=Math.round(+n*f);if(v>=20)v=Math.round(v/5)*5;return Math.max(1,v)});return [sets,r]}
 function hmMissed(){const out=[];for(let k=1;k<=2;k++){const d=new Date();d.setDate(d.getDate()-k);const ds=d.toLocaleDateString('en-CA'),di=(d.getDay()+6)%7,pd=P[di];if(S.pok&&pd&&pd.ex.length&&!S.h.some(x=>x.date==ds)&&!(S.hm&&S.hm[ds]&&Object.keys(S.hm[ds]).length))out.push(di)}return out}
-function hmTog(t,i,j){S.hm=S.hm||{};const k=td(),key=t+'-'+i,a=S.hm[k]=S.hm[k]||{};a[key]=a[key]||[];const x=a[key],p=x.indexOf(j);if(p>=0)x.splice(p,1);else x.push(j);if(!x.length)delete a[key];save();const y=scrollY;render();scrollTo(0,y)}
+function hmTog(t,i,j){S.hm=S.hm||{};const k=td(),key=t+'-'+i,a=S.hm[k]=S.hm[k]||{};a[key]=a[key]||[];const x=a[key],p=x.indexOf(j);if(p>=0)x.splice(p,1);else x.push(j);if(!x.length)delete a[key];save();bgCheck();const y=scrollY;render();scrollTo(0,y)}
 function hmCard(){const m=hmMissed(),T=HM[HMT],tk=(S.hm&&S.hm[td()])||{};
  const tabs=Object.keys(HM).map(k=>`<span class="chip ${HMT==k?'on':''}" onclick="HMT='${k}';const y=scrollY;render();scrollTo(0,y)">${HM[k][0]}</span>`).join('');
  const rows=T[1].map((e,i)=>{const dn=(tk[HMT+'-'+i]||[]),sc=hmSc(e);return `<div style="padding:12px 0;border-top:1px solid var(--line)"><b style="font-size:15px">${e[0]}</b> <span class="mu" style="font-size:13px">· ${sc[0]} × ${sc[1]}</span><div class="mu" style="font-size:12px;margin:3px 0 8px">${e[3]}</div><div style="display:flex;gap:8px">${Array.from({length:sc[0]},(_,j)=>`<div onclick="hmTog('${HMT}',${i},${j})" style="flex:1;text-align:center;padding:10px 0;border-radius:10px;font-weight:600;font-size:14px;${dn.includes(j)?'background:#30d158;color:#fff':'background:#2c2c2e;color:#aaa'}">${dn.includes(j)?'✓':'Set '+(j+1)}</div>`).join('')}</div></div>`}).join('');
